@@ -246,20 +246,54 @@ label.campo-label {
 
   #reset-filtros:hover { 
     color: #006400; 
+ }
+
+  main { 
+    flex: 1; 
+    padding: 40px 48px; 
+    overflow: auto; 
 }
 
-  main { flex: 1; padding: 40px 48px; overflow: auto; }
+  .estado { 
+    font-size: 14px; 
+    color: var(--texto-suave); 
+    max-width: 560px; 
+}
 
-  .estado { font-size: 14px; color: var(--texto-suave); max-width: 560px; }
-  .estado h2 { font-size: 16px; font-weight: 700; color: var(--azul); margin: 0 0 8px 0; }
-  .estado p { line-height: 1.6; margin: 0; }
+  .estado h2 { 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: var(--azul); 
+    margin: 0 0 8px 0; 
+}
 
-  #vista-lista h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 4px 0; color: var(--azul); }
-  #contador { font-size: 14px; color: var(--texto-suave); }
+  .estado p { 
+    line-height: 1.6; 
+    margin: 0; 
+}
+
+  #vista-lista h1 { 
+    font-size: 28px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em; 
+    margin: 0 0 4px 0; 
+    color: var(--azul); 
+}
+
+  #contador { 
+    font-size: 14px; 
+    color: var(--texto-suave); 
+}
 
   .grid-aprendices {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; margin-top: 24px;
-    list-style: none; padding: 0; margin-left: 0; margin-right: 0;
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); 
+    gap: 20px; 
+    margin-top: 24px;
+    list-style: none; 
+    padding: 0; 
+    margin-left: 0; 
+    margin-right: 0;
   }
 
   .tarjeta {
