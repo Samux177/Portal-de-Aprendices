@@ -1,109 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal de Aprendices SENA</title>
-<link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Aprendices SENA</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
-<div class="layout">
-  <div class="sidebar-wrap">
-    <aside id="sidebar">
-      <div class="sidebar-inner">
-        
-        <div class="brand">
-          <img src="img/logosena.png" alt="Logo SENA" class="brand-logo">
-          
-          <div class="brand-text"></div>
-        <div>
-        <p class="brand-title">PORTAL DE<br>APRENDICES</p>
-        <div class="brand-line"></div>
-        <p class="brand-sub">SENA</p>
-        <p class="brand-description">Repositorio de Proyectos</p>
+  <div class="layout">
+    <div class="sidebar-wrap">
+      <aside id="sidebar">
+        <div class="sidebar-inner">
+
+          <div class="brand">
+            <img src="img/logosena.png" alt="Logo SENA" class="brand-logo">
+
+            <div class="brand-text"></div>
+            <div>
+              <p class="brand-title">PORTAL DE<br>APRENDICES</p>
+              <div class="brand-line"></div>
+              <p class="brand-sub">SENA</p>
+              <p class="brand-description">Repositorio de Proyectos</p>
+            </div>
+          </div>
+
+          <nav>
+            <span class="nav-item"><span class="nav-dot"></span> Aprendices</span>
+          </nav>
+
+          <div class="divider"></div>
+
+          <form id="filtros" autocomplete="off">
+            <p class="filtro-titulo">Filtrar</p>
+
+            <div class="campo-grupo" style="margin-top:20px">
+              <label class="campo-label" for="search">Buscar</label>
+              <input type="text" id="search" placeholder="Buscar por nombre...">
+            </div>
+
+            <div class="campo-grupo" style="margin-top:20px">
+              <label class="campo-label" for="filtro-programa">Programa de formación</label>
+              <select id="filtro-programa"></select>
+            </div>
+
+            <div class="campo-grupo" style="margin-top:20px">
+              <label class="campo-label" for="filtro-tech">Tecnología</label>
+              <select id="filtro-tech"></select>
+            </div>
+
+            <button type="button" id="reset-filtros" style="margin-top:14px">Limpiar filtros</button>
+          </form>
         </div>
-        </div>
+      </aside>
+      <button id="sidebar-toggle" title="Ocultar/mostrar menú" aria-label="Ocultar/mostrar menú">‹</button>
+    </div>
 
-        <nav>
-          <span class="nav-item"><span class="nav-dot"></span> Aprendices</span>
-        </nav>
-
-        <div class="divider"></div>
-
-        <form id="filtros" autocomplete="off">
-          <p class="filtro-titulo">Filtrar</p>
-
-          <div class="campo-grupo" style="margin-top:20px">
-            <label class="campo-label" for="search">Buscar</label>
-            <input type="text" id="search" placeholder="Buscar por nombre...">
-          </div>
-
-          <div class="campo-grupo" style="margin-top:20px">
-            <label class="campo-label" for="filtro-programa">Programa de formación</label>
-            <select id="filtro-programa"></select>
-          </div>
-
-          <div class="campo-grupo" style="margin-top:20px">
-            <label class="campo-label" for="filtro-tech">Tecnología</label>
-            <select id="filtro-tech"></select>
-          </div>
-
-          <button type="button" id="reset-filtros" style="margin-top:14px">Limpiar filtros</button>
-        </form>
+    <main>
+      <div id="estado-carga" class="estado" hidden>Cargando aprendices...</div>
+      <div id="estado-error" class="estado" hidden>
+        <h2>No se pudo cargar la hoja de datos</h2>
+        <p>Revisa que el enlace CSV esté publicado y accesible, y recarga la página.</p>
       </div>
-    </aside>
-    <button id="sidebar-toggle" title="Ocultar/mostrar menú" aria-label="Ocultar/mostrar menú">‹</button>
+      <div id="estado-vacio" class="estado" hidden>
+        <h2>Aún no hay aprendices en la hoja</h2>
+        <p>Agrega la fila de encabezados y una fila por aprendiz: nombre, ficha, programa, bio, tecnologias, github,
+          linkedin, portfolio, certificaciones, proyecto1_titulo, proyecto1_descripcion, proyecto1_tecnologias,
+          proyecto1_link, proyecto1_fecha (y proyecto2_/proyecto3_ igual). Separa varios valores en una celda con "|".
+        </p>
+      </div>
+
+      <section id="vista-lista" hidden aria-labelledby="lista-titulo">
+        <h1 id="lista-titulo">Aprendices</h1>
+        <p id="contador"></p>
+        <ul class="grid-aprendices" id="grid-aprendices"></ul>
+      </section>
+
+      <article id="vista-perfil" hidden>
+        <button id="volver" type="button">← Volver a aprendices</button>
+
+        <header class="perfil-header">
+          <div class="avatar avatar-perfil" id="perfil-avatar"></div>
+          <div>
+            <h1 id="perfil-nombre"></h1>
+            <p class="perfil-meta" id="perfil-meta"></p>
+            <p class="perfil-bio" id="perfil-bio"></p>
+            <div class="perfil-links" id="perfil-links"></div>
+          </div>
+        </header>
+
+        <section class="perfil-seccion">
+          <h2>Tecnologías</h2>
+          <ul class="tags-tech" id="perfil-tech"></ul>
+        </section>
+
+        <section class="perfil-seccion">
+          <h2>Certificaciones</h2>
+          <ul class="lista-certs" id="perfil-certs"></ul>
+        </section>
+
+        <section class="perfil-seccion">
+          <h2>Proyectos</h2>
+          <ul class="grid-proyectos" id="perfil-proyectos"></ul>
+        </section>
+      </article>
+    </main>
   </div>
 
-  <main>
-    <div id="estado-carga" class="estado" hidden>Cargando aprendices...</div>
-    <div id="estado-error" class="estado" hidden>
-      <h2>No se pudo cargar la hoja de datos</h2>
-      <p>Revisa que el enlace CSV esté publicado y accesible, y recarga la página.</p>
-    </div>
-    <div id="estado-vacio" class="estado" hidden>
-      <h2>Aún no hay aprendices en la hoja</h2>
-      <p>Agrega la fila de encabezados y una fila por aprendiz: nombre, ficha, programa, bio, tecnologias, github, linkedin, portfolio, certificaciones, proyecto1_titulo, proyecto1_descripcion, proyecto1_tecnologias, proyecto1_link, proyecto1_fecha (y proyecto2_/proyecto3_ igual). Separa varios valores en una celda con "|".</p>
-    </div>
-
-    <section id="vista-lista" hidden aria-labelledby="lista-titulo">
-      <h1 id="lista-titulo">Aprendices</h1>
-      <p id="contador"></p>
-      <ul class="grid-aprendices" id="grid-aprendices"></ul>
-    </section>
-
-    <article id="vista-perfil" hidden>
-      <button id="volver" type="button">← Volver a aprendices</button>
-
-      <header class="perfil-header">
-        <div class="avatar avatar-perfil" id="perfil-avatar"></div>
-        <div>
-          <h1 id="perfil-nombre"></h1>
-          <p class="perfil-meta" id="perfil-meta"></p>
-          <p class="perfil-bio" id="perfil-bio"></p>
-          <div class="perfil-links" id="perfil-links"></div>
-        </div>
-      </header>
-
-      <section class="perfil-seccion">
-        <h2>Tecnologías</h2>
-        <ul class="tags-tech" id="perfil-tech"></ul>
-      </section>
-
-      <section class="perfil-seccion">
-        <h2>Certificaciones</h2>
-        <ul class="lista-certs" id="perfil-certs"></ul>
-      </section>
-
-      <section class="perfil-seccion">
-        <h2>Proyectos</h2>
-        <ul class="grid-proyectos" id="perfil-proyectos"></ul>
-      </section>
-    </article>
-  </main>
-</div>
-
-<script src="js/script.js"></script>
+  <script src="js/script.js"></script>
 </body>
+
 </html>
