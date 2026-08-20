@@ -67,17 +67,41 @@ function rowsToAprendices(rows) {
 }
 
 function aplicarAvatar(el, foto, iniciales) {
+
+  console.log("FOTO RECIBIDA:", foto);
+
   el.style.backgroundImage = 'none';
   el.style.color = 'var(--azul)';
   el.textContent = iniciales;
+
   if (!foto) return;
-  const img = new Image();
+
+  const match = foto.match(/\/file\/d\/([^/]+)/);
+
+const fotoDirecta = match
+  ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`
+  : foto;
+
+  const img = document.createElement('img');
+
+  img.src = fotoDirecta;
+  img.alt = '';
   img.onload = () => {
-    el.style.backgroundImage = `url("${foto}")`;
-    el.style.color = 'transparent';
     el.textContent = '';
+    el.style.color = 'transparent';
+
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.borderRadius = '50%';
+
+    el.appendChild(img);
   };
-  img.src = foto;
+
+  img.onerror = () => {
+    el.textContent = iniciales;
+    el.style.color = 'var(--azul)';
+  };
 }
 
 function poblarSelect(select, valores, actual) {
